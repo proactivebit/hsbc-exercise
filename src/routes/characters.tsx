@@ -4,6 +4,8 @@ import { z } from "zod";
 
 const characterSearchSchema = z.object({
   page: z.number().catch(1),
+  name: z.string().optional(),
+  status: z.string().optional(),
 });
 
 export const Route = createFileRoute("/characters")({
@@ -12,7 +14,7 @@ export const Route = createFileRoute("/characters")({
 });
 
 function CharactersComponent() {
-  const { page } = Route.useSearch();
+  const { page, name, status } = Route.useSearch();
 
-  return <CharactersPage page={page} />;
+  return <CharactersPage page={page} name={name} status={status} />;
 }

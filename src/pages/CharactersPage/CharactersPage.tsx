@@ -1,12 +1,17 @@
 import { CharactersTable } from "@/components/CharactersTable/CharactersTable";
+import { FilterByName } from "@/components/FilterByName/FilterByName";
+import { FilterByStatus } from "@/components/FilterByStatus/FilterByStatus";
+import { Filters } from "@/components/Filters";
 import { useCharacters } from "@/hooks/useCharacters/useCharacters";
 
 interface Props {
   page: number;
+  name?: string;
+  status?: string;
 }
 
-export const CharactersPage = ({ page }: Props) => {
-  const { data, isLoading, isError } = useCharacters(page);
+export const CharactersPage = ({ page, name, status }: Props) => {
+  const { data, isLoading, isError } = useCharacters(page, name, status);
 
   if (isLoading) {
     return <div data-testid="characters-loading">Loading...</div>;
@@ -20,5 +25,13 @@ export const CharactersPage = ({ page }: Props) => {
     return <div data-testid="characters-no-data">No data available.</div>;
   }
 
-  return <CharactersTable data={data} pageNumber={page} />;
+  return (
+    <div>
+      <Filters>
+        <FilterByName />
+        <FilterByStatus />
+      </Filters>
+      <CharactersTable data={data} pageNumber={page} />
+    </div>
+  );
 };

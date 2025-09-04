@@ -53,4 +53,36 @@ describe("useCharacters tests", () => {
     expect(result.current.data).toEqual(response);
     expectation.done();
   });
+
+  it("should fetch characters with name filter", async () => {
+    const response = { results: [] };
+    const name = "Rick";
+    const expectation = nock(RICKANDMORTY_API)
+      .get(`${CHARACTER_API}?page=1&name=${name}`)
+      .reply(200, response);
+
+    const { result } = renderHook(() => useCharacters(1, name), {
+      wrapper: QueryClientWrapper,
+    });
+
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    expect(result.current.data).toEqual(response);
+    expectation.done();
+  });
+
+  it("should fetch characters with status filter", async () => {
+    const response = { results: [] };
+    const status = "alive";
+    const expectation = nock(RICKANDMORTY_API)
+      .get(`${CHARACTER_API}?page=1&status=${status}`)
+      .reply(200, response);
+
+    const { result } = renderHook(() => useCharacters(1, undefined, status), {
+      wrapper: QueryClientWrapper,
+    });
+
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    expect(result.current.data).toEqual(response);
+    expectation.done();
+  });
 });
