@@ -18,9 +18,10 @@ describe("FilterByStatus tests", () => {
     vi.clearAllMocks();
   });
   it("renders correctly", () => {
-    render(<FilterByStatus />);
+    render(<FilterByStatus status="alive" />);
 
     expect(screen.getByTestId("test-filter-by-status")).toBeInTheDocument();
+    expect(screen.getByTestId("test-filter-by-status")).toHaveValue("alive");
     expect(mockedNavigate).not.toHaveBeenCalledOnce();
   });
 
@@ -31,7 +32,6 @@ describe("FilterByStatus tests", () => {
       "Alive"
     );
 
-    expect(screen.getByTestId("test-filter-by-status")).toHaveValue("alive");
     expect(mockedNavigate).toHaveBeenCalledOnce();
   });
 });

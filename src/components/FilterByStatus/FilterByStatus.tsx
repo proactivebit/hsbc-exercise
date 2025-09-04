@@ -1,6 +1,10 @@
 import { useNavigate } from "@tanstack/react-router";
 
-export const FilterByStatus = () => {
+interface Props {
+  status?: string;
+}
+
+export const FilterByStatus = ({ status }: Props) => {
   const navigate = useNavigate({
     from: "/characters",
   });
@@ -8,7 +12,7 @@ export const FilterByStatus = () => {
   const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedStatus = e.target.value;
     navigate({
-      search: (prev) => ({ ...prev, status: selectedStatus }),
+      search: (prev) => ({ ...prev, page: 1, status: selectedStatus }),
     });
   };
 
@@ -21,6 +25,7 @@ export const FilterByStatus = () => {
         name="status"
         className="ml-2 border rounded"
         onChange={onSelectChange}
+        value={status ?? ""}
       >
         <option value="">All</option>
         <option value="alive">Alive</option>

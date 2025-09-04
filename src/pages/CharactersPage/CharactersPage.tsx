@@ -2,6 +2,7 @@ import { CharactersTable } from "@/components/CharactersTable/CharactersTable";
 import { FilterByName } from "@/components/FilterByName/FilterByName";
 import { FilterByStatus } from "@/components/FilterByStatus/FilterByStatus";
 import { Filters } from "@/components/Filters";
+import { FiltersClear } from "@/components/FiltersClaer/FiltersClaer";
 import { useCharacters } from "@/hooks/useCharacters/useCharacters";
 
 interface Props {
@@ -28,8 +29,9 @@ export const CharactersPage = ({ page, name, status }: Props) => {
   return (
     <div>
       <Filters>
-        <FilterByName />
-        <FilterByStatus />
+        <FilterByName name={name} />
+        <FilterByStatus status={status} />
+        <FiltersClear />
       </Filters>
       <CharactersTable data={data} pageNumber={page} />
     </div>

@@ -24,9 +24,10 @@ describe("FilterByName tests", () => {
   });
 
   it("should render correctly", () => {
-    render(<FilterByName />);
+    render(<FilterByName name="Rick" />);
 
     expect(screen.getByTestId("test-filter-by-name")).toBeInTheDocument();
+    expect(screen.getByTestId("test-filter-by-name")).toHaveValue("Rick");
   });
 
   it("should not call navigate immediately after typing", () => {

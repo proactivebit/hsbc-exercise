@@ -1,8 +1,12 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 
-export const FilterByName = () => {
-  const [inputValue, setInputValue] = useState("");
+interface Props {
+  name?: string;
+}
+
+export const FilterByName = ({ name }: Props) => {
+  const [inputValue, setInputValue] = useState(name ?? "");
   const navigate = useNavigate({
     from: "/characters",
   });
@@ -14,7 +18,7 @@ export const FilterByName = () => {
   const onNameChange = useCallback(
     (newName: string) => {
       navigate({
-        search: (prev) => ({ ...prev, name: newName }),
+        search: (prev) => ({ ...prev, page: 1, name: newName }),
       });
     },
     [navigate]
@@ -27,6 +31,10 @@ export const FilterByName = () => {
     return () => clearTimeout(delayInputTimeoutId);
   }, [inputValue, onNameChange]);
 
+  useEffect(() => {
+    setInputValue(name ?? "");
+  }, [name]);
+
   return (
     <div>
       <label htmlFor="filter-by-name" className="mr-2">
@@ -38,6 +46,7 @@ export const FilterByName = () => {
         onChange={handleInputChange}
         className="border p-1"
         type="text"
+        value={inputValue}
       />
     </div>
   );
