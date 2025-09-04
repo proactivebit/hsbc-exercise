@@ -5,12 +5,12 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 const queryClient = new QueryClient();
 
 const RootLayout = () => (
-  <>
+  <div>
     <QueryClientProvider client={queryClient}>
       <Outlet />
     </QueryClientProvider>
     <TanStackRouterDevtools />
-  </>
+  </div>
 );
 
 export const Route = createRootRoute({

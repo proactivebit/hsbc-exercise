@@ -30,12 +30,17 @@ export const CharactersTable = ({ data, pageNumber }: Props) => {
   });
 
   return (
-    <div data-testid="characters-table">
-      <table>
+    <div data-testid="characters-table" className="flex flex-col gap-4">
+      <table style={{ width: table.getTotalSize() }}>
         <thead>
-          <tr>
+          <tr className="bg-gray-200">
             {table.getFlatHeaders().map((header) => (
-              <th key={header.id} colSpan={header.colSpan}>
+              <th
+                className="px-4 py-2 text-left whitespace-nowrap"
+                key={header.id}
+                colSpan={header.colSpan}
+                style={{ width: header.getSize() }}
+              >
                 {flexRender(
                   header.column.columnDef.header,
                   header.getContext()
@@ -46,9 +51,16 @@ export const CharactersTable = ({ data, pageNumber }: Props) => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <tr className="border-b border-gray-200" key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td
+                  className="px-4 py-1 whitespace-nowrap overflow-hidden text-ellipsis text-sm"
+                  key={cell.id}
+                  style={{
+                    width: cell.column.getSize(),
+                    maxWidth: cell.column.getSize(),
+                  }}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

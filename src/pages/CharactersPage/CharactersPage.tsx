@@ -3,6 +3,7 @@ import { FilterByName } from "@/components/FilterByName/FilterByName";
 import { FilterByStatus } from "@/components/FilterByStatus/FilterByStatus";
 import { Filters } from "@/components/Filters";
 import { FiltersClear } from "@/components/FiltersClaer/FiltersClaer";
+import { ReloadPage } from "@/components/ReloadPage/ReloadPage";
 import { useCharacters } from "@/hooks/useCharacters/useCharacters";
 
 interface Props {
@@ -27,13 +28,16 @@ export const CharactersPage = ({ page, name, status }: Props) => {
   }
 
   return (
-    <div>
-      <Filters>
-        <FilterByName name={name} />
-        <FilterByStatus status={status} />
-        <FiltersClear />
-      </Filters>
-      <CharactersTable data={data} pageNumber={page} />
+    <div className="min-h-dvh flex justify-center items-center p-4">
+      <div className="flex flex-col gap-5">
+        <Filters>
+          <FilterByName name={name} />
+          <FilterByStatus status={status} />
+          <FiltersClear />
+          <ReloadPage page={page} />
+        </Filters>
+        <CharactersTable data={data} pageNumber={page} />
+      </div>
     </div>
   );
 };

@@ -23,7 +23,7 @@ export const FilterByStatus = ({ status }: Props) => {
         data-testid="test-filter-by-status"
         id="status"
         name="status"
-        className="ml-2 border rounded"
+        className="ml-2 border rounded px-4 py-2 appearance-none"
         onChange={onSelectChange}
         value={status ?? ""}
       >

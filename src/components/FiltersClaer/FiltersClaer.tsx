@@ -1,4 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
+import { Button } from "../Button";
 
 export const FiltersClear = () => {
   const navigate = useNavigate({
@@ -12,12 +13,8 @@ export const FiltersClear = () => {
   };
 
   return (
-    <button
-      data-testid="test-filters-clear"
-      onClick={onPress}
-      className="border rounded px-2 py-"
-    >
-      Clear Filters
-    </button>
+    <Button data-testid="test-filters-clear" onClick={onPress}>
+      Clear
+    </Button>
   );
 };

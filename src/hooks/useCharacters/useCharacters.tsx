@@ -8,6 +8,7 @@ export function useCharacters(page?: number, name?: string, status?: string) {
     queryKey: ["characters", page, name, status],
     queryFn: () => fetchCharacters(page, name, status),
     placeholderData: keepPreviousData,
+    staleTime: 5 * 60 * 1000,
   });
 }
 

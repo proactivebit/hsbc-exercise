@@ -1,4 +1,5 @@
 import { useCharacters } from "@/hooks/useCharacters/useCharacters";
+import { QueryClientWrapper } from "@/test/utils";
 import type { Character } from "@/types/character";
 import type { PageResponse } from "@/types/page";
 import { render, screen } from "@testing-library/react";
@@ -33,7 +34,11 @@ describe("CharactersPage tests", () => {
       isError: false,
     });
 
-    render(<CharactersPage page={1} />);
+    render(
+      <QueryClientWrapper>
+        <CharactersPage page={1} />
+      </QueryClientWrapper>
+    );
 
     expect(screen.getByTestId("characters-table")).toBeInTheDocument();
     expect(screen.getByText("Rick Sanchez")).toBeInTheDocument();
@@ -56,7 +61,11 @@ describe("CharactersPage tests", () => {
       isError: false,
     });
 
-    render(<CharactersPage page={2} />);
+    render(
+      <QueryClientWrapper>
+        <CharactersPage page={2} />
+      </QueryClientWrapper>
+    );
     expect(screen.getByTestId("characters-table")).toBeInTheDocument();
     expect(screen.getByText("Rick Sanchez")).toBeInTheDocument();
     expect(screen.getByText("Morty Smith")).toBeInTheDocument();
