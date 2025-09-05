@@ -17,11 +17,13 @@ export const FilterByName = ({ name }: Props) => {
 
   const onNameChange = useCallback(
     (newName: string) => {
+      if (newName === name) return; // No change in name, do nothing
       if (!newName) {
+        // Clear name filter if input is empty
         navigate({
           search: (prev) => {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { name, ...rest } = prev;
+            if (name === undefined) return prev; // No name filter to remove
             return { ...rest, page: 1 };
           },
         });
@@ -31,7 +33,7 @@ export const FilterByName = ({ name }: Props) => {
         search: (prev) => ({ ...prev, page: 1, name: newName.trim() }),
       });
     },
-    [navigate]
+    [navigate, name]
   );
 
   useEffect(() => {

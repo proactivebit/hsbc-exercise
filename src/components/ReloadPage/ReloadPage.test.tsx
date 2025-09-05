@@ -1,3 +1,4 @@
+import { CHARACTERS } from "@/constants/queryKeys";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -31,7 +32,7 @@ describe("Reload", () => {
     await userEvent.click(screen.getByTestId("test-reload"));
 
     expect(mockedInvalidateQueries).toHaveBeenCalledWith({
-      queryKey: ["characters", 1],
+      queryKey: [CHARACTERS, 1],
     });
   });
 });

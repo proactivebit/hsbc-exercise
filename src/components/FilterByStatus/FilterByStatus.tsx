@@ -14,8 +14,8 @@ export const FilterByStatus = ({ status }: Props) => {
     if (!selectedStatus) {
       navigate({
         search: (prev) => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { status, ...rest } = prev;
+          if (status === undefined) return prev; // No status filter to remove
           return { ...rest, page: 1 };
         },
       });

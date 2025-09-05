@@ -1,3 +1,4 @@
+import { CHARACTERS } from "@/constants/queryKeys";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "../Button";
 
@@ -9,7 +10,7 @@ export const ReloadPage = ({ page }: Props) => {
   const queryClient = useQueryClient();
 
   const handleReload = () => {
-    queryClient.invalidateQueries({ queryKey: ["characters", page] });
+    queryClient.invalidateQueries({ queryKey: [CHARACTERS, page] });
   };
 
   return (
