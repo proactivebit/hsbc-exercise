@@ -1,4 +1,5 @@
 import { CHARACTER_API, RICKANDMORTY_API } from "@/constants/api";
+import { DEFAULT_PAGE_SIZE } from "@/constants/pagination";
 import { QueryClientWrapper } from "@/test/utils";
 import { renderHook, waitFor } from "@testing-library/react";
 import nock from "nock";
@@ -13,7 +14,7 @@ describe("useCharacters tests", () => {
   it("should fetch characters", async () => {
     const response = { results: [] };
     const expectation = nock(RICKANDMORTY_API)
-      .get(`${CHARACTER_API}?page=1`)
+      .get(`${CHARACTER_API}?page=1&size=${DEFAULT_PAGE_SIZE}`)
       .reply(200, response);
 
     const { result } = renderHook(() => useCharacters(), {
@@ -27,7 +28,7 @@ describe("useCharacters tests", () => {
 
   it("should throw error on fetch failure", async () => {
     const expectation = nock(RICKANDMORTY_API)
-      .get(`${CHARACTER_API}?page=1`)
+      .get(`${CHARACTER_API}?page=1&size=${DEFAULT_PAGE_SIZE}`)
       .reply(500);
 
     const { result } = renderHook(() => useCharacters(), {
@@ -42,7 +43,7 @@ describe("useCharacters tests", () => {
     const response = { results: [] };
     const page = 2;
     const expectation = nock(RICKANDMORTY_API)
-      .get(`${CHARACTER_API}?page=${page}`)
+      .get(`${CHARACTER_API}?page=${page}&size=${DEFAULT_PAGE_SIZE}`)
       .reply(200, response);
 
     const { result } = renderHook(() => useCharacters(page), {
@@ -74,7 +75,7 @@ describe("useCharacters tests", () => {
     const response = { results: [] };
     const name = "Rick";
     const expectation = nock(RICKANDMORTY_API)
-      .get(`${CHARACTER_API}?page=1&name=${name}`)
+      .get(`${CHARACTER_API}?page=1&size=${DEFAULT_PAGE_SIZE}&name=${name}`)
       .reply(200, response);
 
     const { result } = renderHook(() => useCharacters(1, undefined, name), {
@@ -90,7 +91,7 @@ describe("useCharacters tests", () => {
     const response = { results: [] };
     const status = "alive";
     const expectation = nock(RICKANDMORTY_API)
-      .get(`${CHARACTER_API}?page=1&status=${status}`)
+      .get(`${CHARACTER_API}?page=1&size=${DEFAULT_PAGE_SIZE}&status=${status}`)
       .reply(200, response);
 
     const { result } = renderHook(

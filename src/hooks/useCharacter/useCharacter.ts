@@ -1,10 +1,11 @@
 import { CHARACTER_API, RICKANDMORTY_API } from "@/constants/api";
+import { CHARACTER } from "@/constants/queryKeys";
 import type { Character } from "@/types/character";
 import { useQuery } from "@tanstack/react-query";
 
 export function useCharacter(id: number) {
   return useQuery({
-    queryKey: ["character", id],
+    queryKey: [CHARACTER, id],
     queryFn: () => fetchCharacter(id),
   });
 }
