@@ -1,4 +1,4 @@
-import { PAGE_SIZE } from "@/constants/pagination";
+import { DEFAULT_PAGE_SIZE } from "@/constants/pagination";
 import type { Character } from "@/types/character";
 import type { PageResponse } from "@/types/page";
 import { useNavigate } from "@tanstack/react-router";
@@ -13,6 +13,7 @@ import { columns } from "./utils";
 interface Props {
   data: PageResponse<Character> | undefined;
   pageNumber: number;
+  pageSize?: number;
   isLoading: boolean;
   isError: boolean;
 }
@@ -20,6 +21,7 @@ interface Props {
 export const CharactersTable = ({
   data,
   pageNumber,
+  pageSize,
   isLoading,
   isError,
 }: Props) => {
@@ -34,7 +36,7 @@ export const CharactersTable = ({
     state: {
       pagination: {
         pageIndex: pageNumber - 1,
-        pageSize: PAGE_SIZE,
+        pageSize: pageSize ?? DEFAULT_PAGE_SIZE,
       },
     },
   });

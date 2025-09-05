@@ -54,6 +54,22 @@ describe("useCharacters tests", () => {
     expectation.done();
   });
 
+  it("should fetch characters with page size", async () => {
+    const response = { results: [] };
+    const size = 5;
+    const expectation = nock(RICKANDMORTY_API)
+      .get(`${CHARACTER_API}?page=1&size=${size}`)
+      .reply(200, response);
+
+    const { result } = renderHook(() => useCharacters(1, size), {
+      wrapper: QueryClientWrapper,
+    });
+
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    expect(result.current.data).toEqual(response);
+    expectation.done();
+  });
+
   it("should fetch characters with name filter", async () => {
     const response = { results: [] };
     const name = "Rick";
@@ -61,7 +77,7 @@ describe("useCharacters tests", () => {
       .get(`${CHARACTER_API}?page=1&name=${name}`)
       .reply(200, response);
 
-    const { result } = renderHook(() => useCharacters(1, name), {
+    const { result } = renderHook(() => useCharacters(1, undefined, name), {
       wrapper: QueryClientWrapper,
     });
 
@@ -77,9 +93,12 @@ describe("useCharacters tests", () => {
       .get(`${CHARACTER_API}?page=1&status=${status}`)
       .reply(200, response);
 
-    const { result } = renderHook(() => useCharacters(1, undefined, status), {
-      wrapper: QueryClientWrapper,
-    });
+    const { result } = renderHook(
+      () => useCharacters(1, undefined, undefined, status),
+      {
+        wrapper: QueryClientWrapper,
+      }
+    );
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true));
     expect(result.current.data).toEqual(response);

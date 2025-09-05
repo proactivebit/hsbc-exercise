@@ -2,6 +2,7 @@ import type { Character } from "@/types/character";
 import { Link } from "@tanstack/react-router";
 import type { Table } from "@tanstack/react-table";
 import { Button } from "./Button";
+import { PageSize } from "./PageSize";
 
 interface Props {
   table: Table<Character>;
@@ -49,6 +50,7 @@ export const Pagination = ({ table }: Props) => {
           {">>"}
         </Button>
       </Link>
+      <PageSize table={table} />
       <div data-testid="page-info">
         {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
       </div>

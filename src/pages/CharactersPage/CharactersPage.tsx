@@ -8,12 +8,13 @@ import { useCharacters } from "@/hooks/useCharacters/useCharacters";
 
 interface Props {
   page: number;
+  size?: number;
   name?: string;
   status?: string;
 }
 
-export const CharactersPage = ({ page, name, status }: Props) => {
-  const { data, isLoading, isError } = useCharacters(page, name, status);
+export const CharactersPage = ({ page, size, name, status }: Props) => {
+  const { data, isLoading, isError } = useCharacters(page, size, name, status);
 
   return (
     <div className="flex flex-col gap-4">
@@ -26,6 +27,7 @@ export const CharactersPage = ({ page, name, status }: Props) => {
       <CharactersTable
         data={data}
         pageNumber={page}
+        pageSize={size}
         isLoading={isLoading}
         isError={isError}
       />

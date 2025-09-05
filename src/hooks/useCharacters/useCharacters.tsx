@@ -3,20 +3,29 @@ import type { Character } from "@/types/character";
 import type { PageResponse } from "@/types/page";
 import { useQuery } from "@tanstack/react-query";
 
-export function useCharacters(page?: number, name?: string, status?: string) {
+export function useCharacters(
+  page?: number,
+  size?: number,
+  name?: string,
+  status?: string
+) {
   return useQuery({
-    queryKey: ["characters", page, name, status],
-    queryFn: () => fetchCharacters(page, name, status),
+    queryKey: ["characters", page, size, name, status],
+    queryFn: () => fetchCharacters(page, size, name, status),
   });
 }
 
 async function fetchCharacters(
   page?: number,
+  size?: number,
   name?: string,
   status?: string
 ): Promise<PageResponse<Character>> {
   const url = new URL(`${RICKANDMORTY_API}${CHARACTER_API}`);
   url.searchParams.set("page", String(page ?? 1));
+  if (size) {
+    url.searchParams.set("size", String(size));
+  }
   if (name) {
     url.searchParams.set("name", name);
   }
