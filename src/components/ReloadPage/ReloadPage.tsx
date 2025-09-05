@@ -15,7 +15,7 @@ export const ReloadPage = ({ page }: Props) => {
 
   return (
     <Button data-testid="test-reload" onClick={handleReload}>
-      Reload
+      Refresh
     </Button>
   );
 };
