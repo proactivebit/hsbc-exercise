@@ -1,4 +1,5 @@
-OBJECTIVE
+# OBJECTIVE
+
 Build a small single-page application that consumes the public Rick & Morty REST API and presents a
 paginated list of characters and details.
 Mandatory Functional Requirements
@@ -15,7 +16,7 @@ Mandatory Functional Requirements
 - Implement robust error handling and ensure a good user experience
 - Ensure 100% type safety: do not use any or type assertions (as)
 
-  Mandatory Technology Stack
+## Mandatory Technology Stack
 
 - React 18 or later (React 19 with React Compiler is allowed and recommended)
 - TypeScript
@@ -23,7 +24,7 @@ Mandatory Functional Requirements
 - TanStack Router
 - TanStack Table
 
-  Evaluation Criteria
+## Evaluation Criteria
 
 - All mandatory requirements must be fulfilled, and the application must use the entire specified
   technology stack
@@ -32,7 +33,11 @@ Mandatory Functional Requirements
   Delivery
 - Provide a public GitHub repository link
 
-  Not Evaluated
+## Not Evaluated
 
 - Styling or advanced animations
 - Choice of UI library or design system
+
+## Run application
+
+Application build with react with vite. To start run command `npm run dev`
