@@ -9,15 +9,19 @@ export const CharacterDetails = ({ id }: Props) => {
   const character = data.data;
 
   if (data.isLoading) {
-    return <div>Loading...</div>;
+    return <div data-testid="test-loading">Loading...</div>;
   }
 
   if (data.isError) {
-    return <div>Error loading character</div>;
+    return (
+      <div data-testid="test-error" className="text-red-600">
+        Error loading character
+      </div>
+    );
   }
 
   if (!character) {
-    return <div>No character data</div>;
+    return <div data-testid="test-no-character">No character data</div>;
   }
 
   return (
@@ -48,8 +52,12 @@ export const CharacterDetails = ({ id }: Props) => {
           </a>
         </p>
       )}
-      <p>Number of Episodes: {character.episode.length}</p>
-      <p>Created at: {new Date(character.created).toLocaleDateString()}</p>
+      {character.episode && (
+        <p>Number of Episodes: {character.episode.length}</p>
+      )}
+      {character.created && (
+        <p>Created at: {new Date(character.created).toLocaleDateString()}</p>
+      )}
     </div>
   );
 };

@@ -17,8 +17,18 @@ export const FilterByName = ({ name }: Props) => {
 
   const onNameChange = useCallback(
     (newName: string) => {
+      if (!newName) {
+        navigate({
+          search: (prev) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { name, ...rest } = prev;
+            return { ...rest, page: 1 };
+          },
+        });
+        return;
+      }
       navigate({
-        search: (prev) => ({ ...prev, page: 1, name: newName }),
+        search: (prev) => ({ ...prev, page: 1, name: newName.trim() }),
       });
     },
     [navigate]

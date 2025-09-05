@@ -75,43 +75,4 @@ describe("CharactersPage tests", () => {
     expect(screen.getByTestId("next-page")).toBeDisabled();
     expect(screen.getByTestId("last-page")).toBeDisabled();
   });
-
-  it("should show loading state", () => {
-    mockedUseCharacters.mockReturnValue({
-      data: undefined,
-      isLoading: true,
-      isError: false,
-    });
-
-    render(<CharactersPage page={1} />);
-
-    expect(screen.getByTestId("characters-loading")).toBeInTheDocument();
-  });
-
-  it("should show error state", () => {
-    mockedUseCharacters.mockReturnValue({
-      data: undefined,
-      isLoading: false,
-      isError: true,
-    });
-
-    render(<CharactersPage page={1} />);
-
-    expect(screen.getByTestId("characters-error")).toBeInTheDocument();
-  });
-
-  it("should show no data state", () => {
-    mockedUseCharacters.mockReturnValue({
-      data: {
-        info: { count: 0, pages: 0, next: null, prev: null },
-        results: [],
-      },
-      isLoading: false,
-      isError: false,
-    });
-
-    render(<CharactersPage page={1} />);
-
-    expect(screen.getByTestId("characters-no-data")).toBeInTheDocument();
-  });
 });

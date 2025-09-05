@@ -1,13 +1,11 @@
 import { CHARACTER_API, RICKANDMORTY_API } from "@/constants/api";
 import type { Character } from "@/types/character";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export function useCharacter(id: number) {
   return useQuery({
     queryKey: ["character", id],
     queryFn: () => fetchCharacter(id),
-    placeholderData: keepPreviousData,
-    staleTime: 5 * 60 * 1000,
   });
 }
 

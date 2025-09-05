@@ -32,4 +32,37 @@ describe("CharacterDetails", () => {
 
     expect(screen.getByTestId("test-character-details")).toBeInTheDocument();
   });
+
+  it("shows loading state", () => {
+    mockedUseCharacter.mockReturnValue({
+      data: undefined,
+      isLoading: true,
+      isError: false,
+    });
+    render(<CharacterDetails id={1} />);
+
+    expect(screen.getByTestId("test-loading")).toBeInTheDocument();
+  });
+
+  it("shows error state", () => {
+    mockedUseCharacter.mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      isError: true,
+    });
+    render(<CharacterDetails id={1} />);
+
+    expect(screen.getByTestId("test-error")).toBeInTheDocument();
+  });
+
+  it("shows no character state", () => {
+    mockedUseCharacter.mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      isError: false,
+    });
+    render(<CharacterDetails id={1} />);
+
+    expect(screen.getByTestId("test-no-character")).toBeInTheDocument();
+  });
 });

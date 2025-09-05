@@ -11,6 +11,16 @@ export const FilterByStatus = ({ status }: Props) => {
 
   const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedStatus = e.target.value;
+    if (!selectedStatus) {
+      navigate({
+        search: (prev) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { status, ...rest } = prev;
+          return { ...rest, page: 1 };
+        },
+      });
+      return;
+    }
     navigate({
       search: (prev) => ({ ...prev, page: 1, status: selectedStatus }),
     });

@@ -11,19 +11,26 @@ import { Pagination } from "../Pagination";
 import { columns } from "./utils";
 
 interface Props {
-  data: PageResponse<Character>;
+  data: PageResponse<Character> | undefined;
   pageNumber: number;
+  isLoading: boolean;
+  isError: boolean;
 }
 
-export const CharactersTable = ({ data, pageNumber }: Props) => {
+export const CharactersTable = ({
+  data,
+  pageNumber,
+  isLoading,
+  isError,
+}: Props) => {
   const navigate = useNavigate({ from: "/app/characters" });
 
   const table = useReactTable({
-    data: data.results,
+    data: data?.results ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
-    pageCount: data.info.pages,
+    pageCount: data?.info.pages ?? 0,
     state: {
       pagination: {
         pageIndex: pageNumber - 1,
@@ -38,6 +45,22 @@ export const CharactersTable = ({ data, pageNumber }: Props) => {
       params: { characterId: String(characterId) },
     });
   };
+
+  if (isLoading) {
+    return <div data-testid="characters-loading">Loading...</div>;
+  }
+
+  if (isError) {
+    return (
+      <div data-testid="characters-error" className="text-red-600">
+        Error loading characters. Change filters criteria and try again.
+      </div>
+    );
+  }
+
+  if (!data?.info.count) {
+    return <div data-testid="characters-no-data">No data available.</div>;
+  }
 
   return (
     <div data-testid="characters-table" className="flex flex-col gap-4">

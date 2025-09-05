@@ -25,11 +25,57 @@ describe("CharactersTable test", () => {
     vi.clearAllMocks();
   });
   it("should render correctly", () => {
-    render(<CharactersTable data={data} pageNumber={1} />);
+    render(
+      <CharactersTable
+        data={data}
+        pageNumber={1}
+        isLoading={false}
+        isError={false}
+      />
+    );
 
     expect(screen.getByTestId("characters-table")).toBeInTheDocument();
     expect(screen.getByText("Rick Sanchez")).toBeInTheDocument();
     expect(screen.getByText("Morty Smith")).toBeInTheDocument();
     expect(screen.getByTestId("page-info")).toHaveTextContent("1 of 1");
+  });
+
+  it("should show loading state", () => {
+    render(
+      <CharactersTable
+        data={undefined}
+        pageNumber={1}
+        isLoading={true}
+        isError={false}
+      />
+    );
+
+    expect(screen.getByTestId("characters-loading")).toBeInTheDocument();
+  });
+
+  it("should show error state", () => {
+    render(
+      <CharactersTable
+        data={undefined}
+        pageNumber={1}
+        isLoading={false}
+        isError={true}
+      />
+    );
+
+    expect(screen.getByTestId("characters-error")).toBeInTheDocument();
+  });
+
+  it("should show no data state", () => {
+    render(
+      <CharactersTable
+        data={undefined}
+        pageNumber={1}
+        isLoading={false}
+        isError={false}
+      />
+    );
+
+    expect(screen.getByTestId("characters-no-data")).toBeInTheDocument();
   });
 });

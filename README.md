@@ -1,69 +1,32 @@
-# React + TypeScript + Vite
+OBJECTIVE
+Build a small single-page application that consumes the public Rick & Morty REST API and presents a
+paginated list of characters and details.
+Mandatory Functional Requirements
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Fetch data from Rick & Morty API https://rickandmortyapi.com/documentation
+- Display a paginated list of characters
+- Allow the user to select the page size for pagination (select)
+- Allow filtering by character name (text input) and status (select)
+- Persist pagination and filter state in the URL so that the list state survives page refreshes and can
+  be shared via a link
+- Provide a Clear button to clear all filters
+- Provide a Refresh button to re-fetch the currently visible page
+- Show character details on a dedicated route when a character is selected
+- Implement robust error handling and ensure a good user experience
+- Ensure 100% type safety: do not use any or type assertions (as)
+  Mandatory Technology Stack
+- React 18 or later (React 19 with React Compiler is allowed and recommended)
+- TypeScript
+- TanStack Query
+- TanStack Router
+- TanStack Table
+  Evaluation Criteria
+- All mandatory requirements must be fulfilled, and the application must use the entire specified
+  technology stack
+- Code quality, structure, user experience
+- No AI tools used
+  Delivery
+- Provide a public GitHub repository link
+  Not Evaluated
+- Styling or advanced animations
+- Choice of UI library or design system
