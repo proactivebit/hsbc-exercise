@@ -10,11 +10,8 @@ interface Props {
 export const Pagination = ({ table }: Props) => {
   return (
     <div className="flex items-center gap-2">
-      <div data-testid="page-info">
-        {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
-      </div>
       <Link
-        from="/characters"
+        from="/app/characters"
         search={(prev) => ({ ...prev, page: 1 })}
         disabled={!table.getCanPreviousPage()}
       >
@@ -23,7 +20,7 @@ export const Pagination = ({ table }: Props) => {
         </Button>
       </Link>
       <Link
-        from="/characters"
+        from="/app/characters"
         search={(prev) => ({ ...prev, page: prev.page - 1 })}
         disabled={!table.getCanPreviousPage()}
       >
@@ -35,7 +32,7 @@ export const Pagination = ({ table }: Props) => {
         </Button>
       </Link>
       <Link
-        from="/characters"
+        from="/app/characters"
         search={(prev) => ({ ...prev, page: prev.page + 1 })}
         disabled={!table.getCanNextPage()}
       >
@@ -44,7 +41,7 @@ export const Pagination = ({ table }: Props) => {
         </Button>
       </Link>
       <Link
-        from="/characters"
+        from="/app/characters"
         search={(prev) => ({ ...prev, page: table.getPageCount() })}
         disabled={!table.getCanNextPage()}
       >
@@ -52,6 +49,9 @@ export const Pagination = ({ table }: Props) => {
           {">>"}
         </Button>
       </Link>
+      <div data-testid="page-info">
+        {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+      </div>
     </div>
   );
 };

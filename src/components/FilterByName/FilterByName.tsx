@@ -8,7 +8,7 @@ interface Props {
 export const FilterByName = ({ name }: Props) => {
   const [inputValue, setInputValue] = useState(name ?? "");
   const navigate = useNavigate({
-    from: "/characters",
+    from: "/app/characters",
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +44,7 @@ export const FilterByName = ({ name }: Props) => {
         id="filter-by-name"
         data-testid="test-filter-by-name"
         onChange={handleInputChange}
-        className="border p-1"
+        className="border rounded px-2 py-1"
         type="text"
         value={inputValue}
       />

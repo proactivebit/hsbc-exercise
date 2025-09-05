@@ -8,7 +8,7 @@ const characterSearchSchema = z.object({
   status: z.string().optional(),
 });
 
-export const Route = createFileRoute("/characters")({
+export const Route = createFileRoute("/app/characters")({
   validateSearch: characterSearchSchema,
   component: CharactersComponent,
 });

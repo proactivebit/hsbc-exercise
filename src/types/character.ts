@@ -5,8 +5,8 @@ export interface Character {
   species: string;
   type: string;
   gender: Gender;
-  origin: string;
-  location: string;
+  origin: UrlLink;
+  location: UrlLink;
   image: string;
   episode: string[];
   url: string;
@@ -16,3 +16,8 @@ export interface Character {
 type Status = "Alive" | "Dead" | "unknown";
 
 type Gender = "Male" | "Female" | "Genderless" | "unknown";
+
+interface UrlLink {
+  name: string;
+  url: string;
+}

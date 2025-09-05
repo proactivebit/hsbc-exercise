@@ -1,6 +1,7 @@
 import { PAGE_SIZE } from "@/constants/pagination";
 import type { Character } from "@/types/character";
 import type { PageResponse } from "@/types/page";
+import { useNavigate } from "@tanstack/react-router";
 import {
   flexRender,
   getCoreRowModel,
@@ -15,6 +16,8 @@ interface Props {
 }
 
 export const CharactersTable = ({ data, pageNumber }: Props) => {
+  const navigate = useNavigate({ from: "/app/characters" });
+
   const table = useReactTable({
     data: data.results,
     columns,
@@ -28,6 +31,13 @@ export const CharactersTable = ({ data, pageNumber }: Props) => {
       },
     },
   });
+
+  const handleRowClick = (characterId: number) => {
+    navigate({
+      to: "/app/character/$characterId",
+      params: { characterId: String(characterId) },
+    });
+  };
 
   return (
     <div data-testid="characters-table" className="flex flex-col gap-4">
@@ -51,7 +61,11 @@ export const CharactersTable = ({ data, pageNumber }: Props) => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr className="border-b border-gray-200" key={row.id}>
+            <tr
+              className="border-b border-gray-200 cursor-pointer"
+              key={row.id}
+              onClick={() => handleRowClick(row.original.id)}
+            >
               {row.getVisibleCells().map((cell) => (
                 <td
                   className="px-4 py-1 whitespace-nowrap overflow-hidden text-ellipsis text-sm"

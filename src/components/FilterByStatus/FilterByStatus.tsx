@@ -6,7 +6,7 @@ interface Props {
 
 export const FilterByStatus = ({ status }: Props) => {
   const navigate = useNavigate({
-    from: "/characters",
+    from: "/app/characters",
   });
 
   const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -23,7 +23,7 @@ export const FilterByStatus = ({ status }: Props) => {
         data-testid="test-filter-by-status"
         id="status"
         name="status"
-        className="ml-2 border rounded px-4 py-2 appearance-none"
+        className="ml-2 border rounded appearance-none px-2 py-1"
         onChange={onSelectChange}
         value={status ?? ""}
       >

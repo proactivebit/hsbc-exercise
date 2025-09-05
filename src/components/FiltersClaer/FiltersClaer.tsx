@@ -3,7 +3,7 @@ import { Button } from "../Button";
 
 export const FiltersClear = () => {
   const navigate = useNavigate({
-    from: "/characters",
+    from: "/app/characters",
   });
 
   const onPress = () => {

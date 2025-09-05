@@ -28,16 +28,14 @@ export const CharactersPage = ({ page, name, status }: Props) => {
   }
 
   return (
-    <div className="min-h-dvh flex justify-center items-center p-4">
-      <div className="flex flex-col gap-5">
-        <Filters>
-          <FilterByName name={name} />
-          <FilterByStatus status={status} />
-          <FiltersClear />
-          <ReloadPage page={page} />
-        </Filters>
-        <CharactersTable data={data} pageNumber={page} />
-      </div>
+    <div className="flex flex-col gap-4">
+      <Filters>
+        <FilterByName name={name} />
+        <FilterByStatus status={status} />
+        <FiltersClear />
+        <ReloadPage page={page} />
+      </Filters>
+      <CharactersTable data={data} pageNumber={page} />
     </div>
   );
 };
