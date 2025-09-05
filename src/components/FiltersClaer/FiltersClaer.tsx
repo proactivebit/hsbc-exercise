@@ -1,3 +1,4 @@
+import { DEFAULT_PAGE_SIZE } from "@/constants/pagination";
 import { useNavigate } from "@tanstack/react-router";
 import { Button } from "../Button";
 
@@ -8,7 +9,7 @@ export const FiltersClear = () => {
 
   const onPress = () => {
     navigate({
-      search: () => ({ page: 1 }),
+      search: () => ({ page: 1, size: DEFAULT_PAGE_SIZE }),
     });
   };
 
